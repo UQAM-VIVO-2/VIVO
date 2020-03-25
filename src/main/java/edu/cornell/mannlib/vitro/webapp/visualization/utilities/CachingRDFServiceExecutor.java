@@ -108,7 +108,7 @@ public class CachingRDFServiceExecutor<T> {
                     completeBackgroundTask(waitFor);
                 }
 
-        	} 
+        	}
         } else {
             // No cached results, so fetch the results using any available RDF service
             if (rdfService != null) {
@@ -124,7 +124,7 @@ public class CachingRDFServiceExecutor<T> {
         }
         return cachedResults;
     }
-    
+
     public synchronized T get(RDFService rdfService, boolean allowWaits, boolean force) {
     	/*
     	 * UQAM

@@ -32,16 +32,16 @@ public class GeneratorUtil {
 			+ "        ORDER BY ?label \n"
 			;
 	/*
-	 * UQAM Help to generate the labels of scrollDowm list in proper language	
+	 * UQAM Help to generate the labels of scrollDowm list in proper language
 	 */
 	static public ConstantFieldOptions buildConstantFieldOptions(VitroRequest vreq, String DESCRIBE_QUERY) throws Exception {
 
 		List<List<String>> options = builFieldOptionsList(vreq, DESCRIBE_QUERY);
-		ConstantFieldOptions filedOptions = new  ConstantFieldOptions("" , options);	
+		ConstantFieldOptions filedOptions = new  ConstantFieldOptions("" , options);
 		return filedOptions;
 	}
 	/*
-	 * UQAM Help to generate the labels of scrollDowm list in proper language	
+	 * UQAM Help to generate the labels of scrollDowm list in proper language
 	 */
 	static public List<List<String>> builFieldOptionsList(VitroRequest vreq, String DESCRIBE_QUERY) throws Exception {
 
@@ -57,7 +57,7 @@ public class GeneratorUtil {
 		RDFService rdfService = vreq.getRDFService();
 
 		Model constructedModel = RDFServiceUtils.parseModel(
-				rdfService.sparqlDescribeQuery(DESCRIBE_QUERY, RDFService.ModelSerializationFormat.N3),  
+				rdfService.sparqlDescribeQuery(DESCRIBE_QUERY, RDFService.ModelSerializationFormat.N3),
 				RDFService.ModelSerializationFormat.N3);
 
 		Query query = QueryFactory.create(GET_LABEL_QUERY.replaceAll("LANGUAGE", lang.toString())) ;

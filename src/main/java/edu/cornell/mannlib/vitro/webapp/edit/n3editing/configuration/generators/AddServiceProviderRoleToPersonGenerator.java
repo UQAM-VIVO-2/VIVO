@@ -44,29 +44,29 @@ public class AddServiceProviderRoleToPersonGenerator extends AddRoleToPersonTwoS
 			"<http://purl.org/ontology/bibo/Hearing>" +
 			"<http://vivoweb.org/ontology/core#Hospital> " +
 			"<http://vivoweb.org/ontology/core#Institute> " +
-			"<http://purl.org/ontology/bibo/Interview> " + 
+			"<http://purl.org/ontology/bibo/Interview> " +
 			"<http://vivoweb.org/ontology/core#InvitedTalk> " +
 			"<http://vivoweb.org/ontology/core#Laboratory> " +
 			"<http://vivoweb.org/ontology/core#Library> " +
 			"<http://purl.obolibrary.org/obo/OBI_0000835> " +
-			"<http://vivoweb.org/ontology/core#Meeting> " + 
+			"<http://vivoweb.org/ontology/core#Meeting> " +
 			"<http://vivoweb.org/ontology/core#Museum> " +
 			"<http://xmlns.com/foaf/0.1/Organization> " +
-			"<http://purl.org/ontology/bibo/Performance> " + 
-			"<http://vivoweb.org/ontology/core#Presentation> " + 
+			"<http://purl.org/ontology/bibo/Performance> " +
+			"<http://vivoweb.org/ontology/core#Presentation> " +
 			"<http://vivoweb.org/ontology/core#PrivateCompany> " +
 			"<http://vivoweb.org/ontology/core#Program> " +
 			"<http://vivoweb.org/ontology/core#Publisher> " +
 			"<http://vivoweb.org/ontology/core#ResearchOrganization> " +
 			"<http://vivoweb.org/ontology/core#School> " +
-			"<http://vivoweb.org/ontology/core#SeminarSeries> " + 
+			"<http://vivoweb.org/ontology/core#SeminarSeries> " +
 			"<http://vivoweb.org/ontology/core#Team> " +
 			"<http://vivoweb.org/ontology/core#ServiceProvidingLaboratory> " +
 			"<http://vivoweb.org/ontology/core#StudentOrganization> " +
 			"<http://purl.obolibrary.org/obo/ERO_0000565> " +
 			"<http://vivoweb.org/ontology/core#University> " +
-			"<http://purl.org/ontology/bibo/Workshop> " + 
-			"<http://vivoweb.org/ontology/core#WorkshopSeries> ";			
+			"<http://purl.org/ontology/bibo/Workshop> " +
+			"<http://vivoweb.org/ontology/core#WorkshopSeries> ";
 	/** Service Provider role involves hard-coded options for the
 	 * "right side" of the role or activity.	 */
 	@Override

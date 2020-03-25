@@ -408,7 +408,7 @@ final public class VisualizationCaches {
                                     "    ?person core:hasResearchArea ?concept .\n" +
                                     "    ?concept a skos:Concept .\n" +
                                     "    ?concept rdfs:label ?label .\n" +
-                    				"    FILTER (lang(?label) = '" + langCtx+"' )  \n" + 
+                    				"    FILTER (lang(?label) = '" + langCtx+"' )  \n" +
                                     "}\n";
 
 //                            final Map<String, String> map = new HashMap<>();

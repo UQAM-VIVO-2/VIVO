@@ -27,7 +27,7 @@ public class AddReviewerRoleToPersonGenerator extends AddRoleToPersonTwoStageGen
 		//TODO: Get dynamic way of including vivoweb ontology
 		return "http://vivoweb.org/ontology/core#ReviewerRole";
 	}
-	
+
 	// UQAM Added for buildConstantFieldOptions() call
 	private static String DESCRIBE_QUERY = " describe "+
 			"<http://purl.org/ontology/bibo/AcademicArticle> " +

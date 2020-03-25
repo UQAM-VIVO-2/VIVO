@@ -624,7 +624,7 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
 
 	private void setFields(EditConfigurationVTwo editConfiguration, VitroRequest vreq) throws Exception {
 		setTitleField(editConfiguration);
-		//UQAM needs for getting appropriated value in the linguistic context 
+		//UQAM needs for getting appropriated value in the linguistic context
 		setPubTypeField(editConfiguration, vreq);
 		setPubUriField(editConfiguration);
 		setCollectionLabelField(editConfiguration);

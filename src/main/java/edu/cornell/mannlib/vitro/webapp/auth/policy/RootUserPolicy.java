@@ -203,7 +203,7 @@ public class RootUserPolicy implements PolicyIface {
 					+ "it is best to delete unneeded root user accounts.");
 		}
 		/*
-		 * UQAM 
+		 * UQAM
 		 * Add for getting rootUser.password property value from runtime.properties
 		 */
 		private String getRootPasswordFromConfig() {
@@ -211,20 +211,20 @@ public class RootUserPolicy implements PolicyIface {
 					PROPERTY_ROOT_USER_PASSWORD);
 			if (passwd == null) {
 				passwd = ROOT_USER_INITIAL_PASSWORD;
-			} 
+			}
 			return passwd;
 		}
 
 		/*
-		 * UQAM 
+		 * UQAM
 		 * Add for getting rootUser.passwordChangeRequired  property value  from runtime.properties
 		 */
 		private Boolean getRootPasswdChangeRequiredFromConfig() {
-			String passwdCR = ConfigurationProperties.getBean(ctx).getProperty( 
+			String passwdCR = ConfigurationProperties.getBean(ctx).getProperty(
 					PROPERTY_ROOT_USER_PASSWORD_CHANGE_REQUIRED);
 			if (passwdCR == null) {
 				passwdCR = ROOT_USER_INITIAL_PASSWORD_CHANGE_REQUIRED;
-			} 
+			}
 			return new Boolean(passwdCR);
 		}
 		@Override
