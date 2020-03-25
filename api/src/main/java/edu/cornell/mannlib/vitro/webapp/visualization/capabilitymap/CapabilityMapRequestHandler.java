@@ -54,12 +54,12 @@ public class CapabilityMapRequestHandler implements VisualizationRequestHandler 
 
     @Override
     public Object generateAjaxVisualization(VitroRequest vitroRequest, Log log, Dataset dataSource) throws MalformedQueryParametersException, JsonProcessingException {
-    	RDFService rdfService = vitroRequest.getRDFService();
-    	rdfService.setVitroRequest(vitroRequest);
- //   	VisualizationCaches.rebuildAll(rdfService);
- //   	VisualizationCaches.conceptToLabel.build(rdfService);
+        RDFService rdfService = vitroRequest.getRDFService();
+        rdfService.setVitroRequest(vitroRequest);
+ //       VisualizationCaches.rebuildAll(rdfService);
+ //       VisualizationCaches.conceptToLabel.build(rdfService);
 //        ConceptLabelMap       conceptLabelMap = VisualizationCaches.conceptToLabel.getNoWait(rdfService);
-    	// UQAM Refresh all memory models with appropriate liguistic labels
+        // UQAM Refresh all memory models with appropriate liguistic labels
         ConceptLabelMap       conceptLabelMap = VisualizationCaches.conceptToLabel.get(rdfService, true, true);
         ConceptPeopleMap      conceptPeopleMap = VisualizationCaches.conceptToPeopleMap.getNoWait(rdfService);
         OrganizationPeopleMap organizationPeopleMap = VisualizationCaches.organisationToPeopleMap.getNoWait(rdfService);

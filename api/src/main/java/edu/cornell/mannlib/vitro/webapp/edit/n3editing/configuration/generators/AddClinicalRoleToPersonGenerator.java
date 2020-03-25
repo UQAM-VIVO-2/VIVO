@@ -13,37 +13,37 @@ public class AddClinicalRoleToPersonGenerator extends AddRoleToPersonTwoStageGen
     //Should this be overridden
     @Override
     String getTemplate() {
-    	return template;
+        return template;
     }
 
     @Override
     String getRoleType() {
-    	return "http://vivoweb.org/ontology/core#ClinicalRole";
+        return "http://vivoweb.org/ontology/core#ClinicalRole";
     }
 
     /** Clinical role involves hard-coded options for the "right side" of the role or activity. */
     @Override
     FieldOptions getRoleActivityFieldOptions(VitroRequest vreq) throws Exception {
-    	//		return new ConstantFieldOptions(
-    	//		        "",  "Select one",
-    	//		        "http://vivoweb.org/ontology/core#Project", "Project",
-    	//		        "http://purl.obolibrary.org/obo/ERO_0000005", "Service"
-    	//		);
+        //		return new ConstantFieldOptions(
+        //		        "",  "Select one",
+        //		        "http://vivoweb.org/ontology/core#Project", "Project",
+        //		        "http://purl.obolibrary.org/obo/ERO_0000005", "Service"
+        //		);
 
-    	//UQAM Replacing the above hard coding assigment by a dynamic assigment that takes into account the linguistic context
-    	ConstantFieldOptions filedOptions = GeneratorUtil.buildConstantFieldOptions(vreq, DESCRIBE_QUERY);
-    	return filedOptions;
+        //UQAM Replacing the above hard coding assigment by a dynamic assigment that takes into account the linguistic context
+        ConstantFieldOptions filedOptions = GeneratorUtil.buildConstantFieldOptions(vreq, DESCRIBE_QUERY);
+        return filedOptions;
     }
     /*
      * UQAM get attributes for this specific subject
      */
     private static String DESCRIBE_QUERY = " describe "+
-    		"<http://vivoweb.org/ontology/core#Project> "+
-    		"<http://purl.obolibrary.org/obo/ERO_0000005>";
+        	"<http://vivoweb.org/ontology/core#Project> "+
+        	"<http://purl.obolibrary.org/obo/ERO_0000005>";
     //isShowRoleLabelField remains true for this so doesn't need to be overwritten
     @Override
     boolean isShowRoleLabelField(){
-    	return true;
+        return true;
     }
 
 
@@ -56,12 +56,12 @@ public class AddClinicalRoleToPersonGenerator extends AddRoleToPersonTwoStageGen
     /*
         public String getStartDatePrecision() {
             String precision = VitroVocabulary.Precision.MONTH.uri();
-    	    return precision;
+            return precision;
         }
 
         public String getEndDatePrecision() {
             String precision = VitroVocabulary.Precision.DAY.uri();
-    	    return precision;
+            return precision;
         }
      */
 

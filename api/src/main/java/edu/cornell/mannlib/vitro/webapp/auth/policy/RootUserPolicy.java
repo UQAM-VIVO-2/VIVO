@@ -51,19 +51,19 @@ public class RootUserPolicy implements PolicyIface {
      */
     @Override
     public PolicyDecision isAuthorized(IdentifierBundle whoToAuth,
-    		RequestedAction whatToAuth) {
-    	if (IsRootUser.isRootUser(whoToAuth)) {
-    		return new BasicPolicyDecision(Authorization.AUTHORIZED,
-    				"RootUserPolicy: approved");
-    	} else {
-    		return new BasicPolicyDecision(Authorization.INCONCLUSIVE,
-    				"not root user");
-    	}
+        	RequestedAction whatToAuth) {
+        if (IsRootUser.isRootUser(whoToAuth)) {
+        	return new BasicPolicyDecision(Authorization.AUTHORIZED,
+        			"RootUserPolicy: approved");
+        } else {
+        	return new BasicPolicyDecision(Authorization.INCONCLUSIVE,
+        			"not root user");
+        }
     }
 
     @Override
     public String toString() {
-    	return "RootUserPolicy - " + hashCode();
+        return "RootUserPolicy - " + hashCode();
     }
 
     // ----------------------------------------------------------------------
@@ -71,165 +71,165 @@ public class RootUserPolicy implements PolicyIface {
     // ----------------------------------------------------------------------
 
     public static class Setup implements ServletContextListener {
-    	private ServletContext ctx;
-    	private StartupStatus ss;
-    	private UserAccountsDao uaDao;
-    	private ConfigurationProperties cp;
-    	private String configuredRootUser;
-    	private boolean configuredRootUserExists;
-    	private TreeSet<String> otherRootUsers;
+        private ServletContext ctx;
+        private StartupStatus ss;
+        private UserAccountsDao uaDao;
+        private ConfigurationProperties cp;
+        private String configuredRootUser;
+        private boolean configuredRootUserExists;
+        private TreeSet<String> otherRootUsers;
 
-    	@Override
-    	public void contextInitialized(ServletContextEvent sce) {
-    		ctx = sce.getServletContext();
-    		ss = StartupStatus.getBean(ctx);
-    		cp = ConfigurationProperties.getBean(ctx);
+        @Override
+        public void contextInitialized(ServletContextEvent sce) {
+        	ctx = sce.getServletContext();
+        	ss = StartupStatus.getBean(ctx);
+        	cp = ConfigurationProperties.getBean(ctx);
 
-    		try {
-    			uaDao = ModelAccess.on(ctx).getWebappDaoFactory()
-    					.getUserAccountsDao();
-    			configuredRootUser = getRootEmailFromConfig();
+        	try {
+        		uaDao = ModelAccess.on(ctx).getWebappDaoFactory()
+        				.getUserAccountsDao();
+        		configuredRootUser = getRootEmailFromConfig();
 
-    			otherRootUsers = getEmailsOfAllRootUsers();
-    			configuredRootUserExists = otherRootUsers
-    					.remove(configuredRootUser);
+        		otherRootUsers = getEmailsOfAllRootUsers();
+        		configuredRootUserExists = otherRootUsers
+        				.remove(configuredRootUser);
 
-    			if (configuredRootUserExists) {
-    				if (otherRootUsers.isEmpty()) {
-    					informThatRootUserExists();
-    				} else {
-    					complainAboutMultipleRootUsers();
-    				}
-    			} else {
-    				createRootUser();
-    				if (!otherRootUsers.isEmpty()) {
-    					complainAboutWrongRootUsers();
-    				}
-    			}
+        		if (configuredRootUserExists) {
+        			if (otherRootUsers.isEmpty()) {
+        				informThatRootUserExists();
+        			} else {
+        				complainAboutMultipleRootUsers();
+        			}
+        		} else {
+        			createRootUser();
+        			if (!otherRootUsers.isEmpty()) {
+        				complainAboutWrongRootUsers();
+        			}
+        		}
 
-    			ServletPolicyList.addPolicy(ctx, new RootUserPolicy());
-    		} catch (Exception e) {
-    			ss.fatal(this, "Failed to set up the RootUserPolicy", e);
-    		}
-    	}
+        		ServletPolicyList.addPolicy(ctx, new RootUserPolicy());
+        	} catch (Exception e) {
+        		ss.fatal(this, "Failed to set up the RootUserPolicy", e);
+        	}
+        }
 
-    	private String getRootEmailFromConfig() {
-    		String email = ConfigurationProperties.getBean(ctx).getProperty(
-    				PROPERTY_ROOT_USER_EMAIL);
-    		if (email == null) {
-    			throw new IllegalStateException(
-    					"runtime.properties must contain a value for '"
-    							+ PROPERTY_ROOT_USER_EMAIL + "'");
-    		} else {
-    			return email;
-    		}
-    	}
+        private String getRootEmailFromConfig() {
+        	String email = ConfigurationProperties.getBean(ctx).getProperty(
+        			PROPERTY_ROOT_USER_EMAIL);
+        	if (email == null) {
+        		throw new IllegalStateException(
+        				"runtime.properties must contain a value for '"
+        						+ PROPERTY_ROOT_USER_EMAIL + "'");
+        	} else {
+        		return email;
+        	}
+        }
 
 
-    	private TreeSet<String> getEmailsOfAllRootUsers() {
-    		TreeSet<String> rootUsers = new TreeSet<String>();
-    		for (UserAccount ua : uaDao.getAllUserAccounts()) {
-    			if (ua.isRootUser()) {
-    				rootUsers.add(ua.getEmailAddress());
-    			}
-    		}
-    		return rootUsers;
-    	}
+        private TreeSet<String> getEmailsOfAllRootUsers() {
+        	TreeSet<String> rootUsers = new TreeSet<String>();
+        	for (UserAccount ua : uaDao.getAllUserAccounts()) {
+        		if (ua.isRootUser()) {
+        			rootUsers.add(ua.getEmailAddress());
+        		}
+        	}
+        	return rootUsers;
+        }
 
-    	/**
-    	 * TODO The first and last name should be left blank, so the user will
-    	 * be forced to edit them. However, that's not in place yet.
-    	 */
-    	private void createRootUser() {
-    		if (!Authenticator.isValidEmailAddress(configuredRootUser)) {
-    			throw new IllegalStateException("Value for '"
-    					+ PROPERTY_ROOT_USER_EMAIL
-    					+ "' is not a valid email address: '"
-    					+ configuredRootUser + "'");
-    		}
+        /**
+         * TODO The first and last name should be left blank, so the user will
+         * be forced to edit them. However, that's not in place yet.
+         */
+        private void createRootUser() {
+        	if (!Authenticator.isValidEmailAddress(configuredRootUser)) {
+        		throw new IllegalStateException("Value for '"
+        				+ PROPERTY_ROOT_USER_EMAIL
+        				+ "' is not a valid email address: '"
+        				+ configuredRootUser + "'");
+        	}
 
-    		if (null != uaDao.getUserAccountByEmail(configuredRootUser)) {
-    			throw new IllegalStateException("Can't create root user - "
-    					+ "an account already exists with email address '"
-    					+ configuredRootUser + "'");
-    		}
+        	if (null != uaDao.getUserAccountByEmail(configuredRootUser)) {
+        		throw new IllegalStateException("Can't create root user - "
+        				+ "an account already exists with email address '"
+        				+ configuredRootUser + "'");
+        	}
 
-    		UserAccount ua = new UserAccount();
-    		ua.setEmailAddress(configuredRootUser);
-    		ua.setFirstName("root");
-    		ua.setLastName("user");
-    		// UQAM using getRootPasswordFromConfig()
-    		ua.setArgon2Password(Authenticator.applyArgon2iEncoding(
-    				getRootPasswordFromConfig()));
-    		ua.setMd5Password("");
-    		Boolean toto;
-    		// UQAM using getRootPasswdChangeRequiredFromConfig()
-    		ua.setPasswordChangeRequired(getRootPasswdChangeRequiredFromConfig().booleanValue());
-    		ua.setStatus(Status.ACTIVE);
-    		ua.setRootUser(true);
+        	UserAccount ua = new UserAccount();
+        	ua.setEmailAddress(configuredRootUser);
+        	ua.setFirstName("root");
+        	ua.setLastName("user");
+        	// UQAM using getRootPasswordFromConfig()
+        	ua.setArgon2Password(Authenticator.applyArgon2iEncoding(
+        			getRootPasswordFromConfig()));
+        	ua.setMd5Password("");
+        	Boolean toto;
+        	// UQAM using getRootPasswdChangeRequiredFromConfig()
+        	ua.setPasswordChangeRequired(getRootPasswdChangeRequiredFromConfig().booleanValue());
+        	ua.setStatus(Status.ACTIVE);
+        	ua.setRootUser(true);
 
-    		uaDao.insertUserAccount(ua);
+        	uaDao.insertUserAccount(ua);
 
-    		StartupStatus.getBean(ctx).info(this,
-    				"Created root user '" + configuredRootUser + "'");
-    	}
+        	StartupStatus.getBean(ctx).info(this,
+        			"Created root user '" + configuredRootUser + "'");
+        }
 
-    	private void informThatRootUserExists() {
-    		ss.info(this, "Root user is " + configuredRootUser);
-    	}
+        private void informThatRootUserExists() {
+        	ss.info(this, "Root user is " + configuredRootUser);
+        }
 
-    	private void complainAboutMultipleRootUsers() {
-    		for (String other : otherRootUsers) {
-    			ss.warning(this, "runtime.properties specifies '"
-    					+ configuredRootUser + "' as the value for '"
-    					+ PROPERTY_ROOT_USER_EMAIL
-    					+ "', but the system also contains this root user: "
-    					+ other);
-    		}
-    		ss.warning(this, "For security, "
-    				+ "it is best to delete unneeded root user accounts.");
-    	}
+        private void complainAboutMultipleRootUsers() {
+        	for (String other : otherRootUsers) {
+        		ss.warning(this, "runtime.properties specifies '"
+        				+ configuredRootUser + "' as the value for '"
+        				+ PROPERTY_ROOT_USER_EMAIL
+        				+ "', but the system also contains this root user: "
+        				+ other);
+        	}
+        	ss.warning(this, "For security, "
+        			+ "it is best to delete unneeded root user accounts.");
+        }
 
-    	private void complainAboutWrongRootUsers() {
-    		for (String other : otherRootUsers) {
-    			ss.warning(this, "runtime.properties specifies '"
-    					+ configuredRootUser + "' as the value for '"
-    					+ PROPERTY_ROOT_USER_EMAIL
-    					+ "', but the system contains this root user instead: "
-    					+ other);
-    		}
-    		ss.warning(this, "Creating root user '" + configuredRootUser + "'");
-    		ss.warning(this, "For security, "
-    				+ "it is best to delete unneeded root user accounts.");
-    	}
-    	/*
-    	 * UQAM
-    	 * Add for getting rootUser.password property value from runtime.properties
-    	 */
-    	private String getRootPasswordFromConfig() {
-    		String passwd = ConfigurationProperties.getBean(ctx).getProperty(
-    				PROPERTY_ROOT_USER_PASSWORD);
-    		if (passwd == null) {
-    			passwd = ROOT_USER_INITIAL_PASSWORD;
-    		}
-    		return passwd;
-    	}
+        private void complainAboutWrongRootUsers() {
+        	for (String other : otherRootUsers) {
+        		ss.warning(this, "runtime.properties specifies '"
+        				+ configuredRootUser + "' as the value for '"
+        				+ PROPERTY_ROOT_USER_EMAIL
+        				+ "', but the system contains this root user instead: "
+        				+ other);
+        	}
+        	ss.warning(this, "Creating root user '" + configuredRootUser + "'");
+        	ss.warning(this, "For security, "
+        			+ "it is best to delete unneeded root user accounts.");
+        }
+        /*
+         * UQAM
+         * Add for getting rootUser.password property value from runtime.properties
+         */
+        private String getRootPasswordFromConfig() {
+        	String passwd = ConfigurationProperties.getBean(ctx).getProperty(
+        			PROPERTY_ROOT_USER_PASSWORD);
+        	if (passwd == null) {
+        		passwd = ROOT_USER_INITIAL_PASSWORD;
+        	}
+        	return passwd;
+        }
 
-    	/*
-    	 * UQAM
-    	 * Add for getting rootUser.passwordChangeRequired  property value  from runtime.properties
-    	 */
-    	private Boolean getRootPasswdChangeRequiredFromConfig() {
-    		String passwdCR = ConfigurationProperties.getBean(ctx).getProperty(
-    				PROPERTY_ROOT_USER_PASSWORD_CHANGE_REQUIRED);
-    		if (passwdCR == null) {
-    			passwdCR = ROOT_USER_INITIAL_PASSWORD_CHANGE_REQUIRED;
-    		}
-    		return new Boolean(passwdCR);
-    	}
-    	@Override
-    	public void contextDestroyed(ServletContextEvent sce) {
-    		// Nothing to destroy
-    	}
+        /*
+         * UQAM
+         * Add for getting rootUser.passwordChangeRequired  property value  from runtime.properties
+         */
+        private Boolean getRootPasswdChangeRequiredFromConfig() {
+        	String passwdCR = ConfigurationProperties.getBean(ctx).getProperty(
+        			PROPERTY_ROOT_USER_PASSWORD_CHANGE_REQUIRED);
+        	if (passwdCR == null) {
+        		passwdCR = ROOT_USER_INITIAL_PASSWORD_CHANGE_REQUIRED;
+        	}
+        	return new Boolean(passwdCR);
+        }
+        @Override
+        public void contextDestroyed(ServletContextEvent sce) {
+        	// Nothing to destroy
+        }
     }
 }

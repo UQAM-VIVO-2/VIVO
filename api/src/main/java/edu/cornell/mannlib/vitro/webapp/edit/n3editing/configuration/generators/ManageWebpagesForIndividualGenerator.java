@@ -77,10 +77,10 @@ public class ManageWebpagesForIndividualGenerator extends BaseEditConfigurationG
         paramMap.put("editForm" , this.getEditForm() );
         paramMap.put("cancelTo", "manage");
         if(domainUri != null && !domainUri.isEmpty()) {
-        	paramMap.put("domainUri", domainUri);
+            paramMap.put("domainUri", domainUri);
         }
         if(rangeUri != null && !rangeUri.isEmpty()) {
-        	paramMap.put("rangeUri", rangeUri);
+            paramMap.put("rangeUri", rangeUri);
         }
         path = UrlBuilder.getUrl( UrlBuilder.Route.EDIT_REQUEST_DISPATCH ,paramMap);
 
@@ -167,7 +167,7 @@ public class ManageWebpagesForIndividualGenerator extends BaseEditConfigurationG
      // UQAM Add linguistic control on label
         + "                FILTER (lang(?typeLabel) = 'LANGUAGE' ) } \n"
         + "} GROUP BY ?rank ?vcard ?link ?url ?typeLabel \n"
-    	+ "  ORDER BY ?rank";
+        + "  ORDER BY ?rank";
 
 
     private List<Map<String, String>> getWebpages(String subjectUri, VitroRequest vreq) {
@@ -208,7 +208,7 @@ public class ManageWebpagesForIndividualGenerator extends BaseEditConfigurationG
 
     //Putting this into a method allows overriding it in subclasses
     protected String getEditForm() {
-    	return AddEditWebpageFormGenerator.class.getName();
+        return AddEditWebpageFormGenerator.class.getName();
     }
 
     protected String getQuery(VitroRequest vreq) {
@@ -216,10 +216,10 @@ public class ManageWebpagesForIndividualGenerator extends BaseEditConfigurationG
          * UQAM Adjust the query to the liguistic context
          */
         Locale lang = SelectedLocale.getCurrentLocale(vreq);
-    	return WEBPAGE_QUERY.replaceAll("LANGUAGE", lang.toString());
+        return WEBPAGE_QUERY.replaceAll("LANGUAGE", lang.toString());
     }
 
     protected String getTemplate() {
-    	return "manageWebpagesForIndividual.ftl";
+        return "manageWebpagesForIndividual.ftl";
     }
 }

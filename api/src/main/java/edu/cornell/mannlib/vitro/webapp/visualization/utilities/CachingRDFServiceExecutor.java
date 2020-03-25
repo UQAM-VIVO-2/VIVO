@@ -91,7 +91,7 @@ public class CachingRDFServiceExecutor<T> {
         if (cachedResults != null) {
             // If the background service exists, and the cache is considered invalid
 
-        	if (backgroundRDFService != null && resultBuilder.invalidateCache(System.currentTimeMillis() - lastCacheTime)) {
+            if (backgroundRDFService != null && resultBuilder.invalidateCache(System.currentTimeMillis() - lastCacheTime)) {
                 // In most cases, only wait for half a second
                 long waitFor = 500;
 
@@ -108,7 +108,7 @@ public class CachingRDFServiceExecutor<T> {
                     completeBackgroundTask(waitFor);
                 }
 
-        	}
+            }
         } else {
             // No cached results, so fetch the results using any available RDF service
             if (rdfService != null) {
@@ -126,26 +126,26 @@ public class CachingRDFServiceExecutor<T> {
     }
 
     public synchronized T get(RDFService rdfService, boolean allowWaits, boolean force) {
-    	/*
-    	 * UQAM
-    	 * Force la regénération  du résultat
-    	 */
-    	if (force) {
-    		try {
-        		String backLang = backgroundRDFService.getVitroRequest().getLocale().getLanguage();
-        		String srvLang = rdfService.getVitroRequest().getLocale().getLanguage();
-        		if (!backLang.equals(srvLang)) {
-        			backgroundRDFService.setVitroRequest(rdfService.getVitroRequest());
-            		startBackgroundTask(rdfService);
-            		completeBackgroundTask();
-        		}
-    		} catch (Exception e) {
-    			backgroundRDFService.setVitroRequest(rdfService.getVitroRequest());
-        		startBackgroundTask(rdfService);
-        		completeBackgroundTask();
-    		}
-    		return cachedResults;
-    	}
+        /*
+         * UQAM
+         * Force la regénération  du résultat
+         */
+        if (force) {
+        	try {
+            	String backLang = backgroundRDFService.getVitroRequest().getLocale().getLanguage();
+            	String srvLang = rdfService.getVitroRequest().getLocale().getLanguage();
+            	if (!backLang.equals(srvLang)) {
+            		backgroundRDFService.setVitroRequest(rdfService.getVitroRequest());
+                	startBackgroundTask(rdfService);
+                	completeBackgroundTask();
+            	}
+        	} catch (Exception e) {
+        		backgroundRDFService.setVitroRequest(rdfService.getVitroRequest());
+            	startBackgroundTask(rdfService);
+            	completeBackgroundTask();
+        	}
+        	return cachedResults;
+        }
         // First, check if there are results from the previous background task, and update the cache
         if (backgroundTask != null && backgroundTask.isDone()) {
             completeBackgroundTask();
@@ -154,7 +154,7 @@ public class CachingRDFServiceExecutor<T> {
         if (cachedResults != null) {
             // If the background service exists, and the cache is considered invalid
 
-        	if (backgroundRDFService != null && resultBuilder.invalidateCache(System.currentTimeMillis() - lastCacheTime)) {
+            if (backgroundRDFService != null && resultBuilder.invalidateCache(System.currentTimeMillis() - lastCacheTime)) {
                 // In most cases, only wait for half a second
                 long waitFor = 500;
 
@@ -441,21 +441,21 @@ public class CachingRDFServiceExecutor<T> {
          */
         boolean invalidateCache(long timeCached) {
             if (executionTime > -1) {
-    				/*
-    					Determine validity as a function of the time it takes to execute the query.
+        			/*
+        				Determine validity as a function of the time it takes to execute the query.
 
-    					Query exec time  | Keep cache for
-    					-----------------+-----------------
-    					10 seconds       | 20 minutes
-    					30 seconds       | 1 hour
-    					1 minute         | 2 hours
-    					5 minutes        | 10 hours
+        				Query exec time  | Keep cache for
+        				-----------------+-----------------
+        				10 seconds       | 20 minutes
+        				30 seconds       | 1 hour
+        				1 minute         | 2 hours
+        				5 minutes        | 10 hours
 
 
-    					Multiplier of the last execution time is 120.
+        				Multiplier of the last execution time is 120.
 
-    					At most, keep a cache for one day (24 * 60 * 60 * 1000 = 86400000)
-    				 */
+        				At most, keep a cache for one day (24 * 60 * 60 * 1000 = 86400000)
+        			 */
 
                 return timeCached > Math.min(executionTime * 120, 86400000);
             }

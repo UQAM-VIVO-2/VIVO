@@ -153,7 +153,7 @@ public class AddEditorshipToPersonGenerator extends VivoBaseGenerator implements
     /* Queries for editing an existing entry */
 
     final static String documentTypeQuery =
-    	"PREFIX vitro: <" + VitroVocabulary.vitroURI + "> \n" +
+        "PREFIX vitro: <" + VitroVocabulary.vitroURI + "> \n" +
         "PREFIX vivo: <" + vivoCore + "> . \n" +
         "PREFIX bibo: <http://purl.org/ontology/bibo/> . \n" +
         "SELECT ?documentType WHERE { \n" +
@@ -163,7 +163,7 @@ public class AddEditorshipToPersonGenerator extends VivoBaseGenerator implements
         "}";
 
     final static String documentLabelQuery  =
-    	"PREFIX vitro: <" + VitroVocabulary.vitroURI + "> \n" +
+        "PREFIX vitro: <" + VitroVocabulary.vitroURI + "> \n" +
         "PREFIX vivo: <" + vivoCore + "> . \n" +
         "PREFIX bibo: <http://purl.org/ontology/bibo/> . \n" +
         "SELECT ?documentLabel WHERE { \n" +
@@ -173,7 +173,7 @@ public class AddEditorshipToPersonGenerator extends VivoBaseGenerator implements
         "}";
 
     final static String existingDocumentQuery  =
-    	"PREFIX vitro: <" + VitroVocabulary.vitroURI + "> \n" +
+        "PREFIX vitro: <" + VitroVocabulary.vitroURI + "> \n" +
         "PREFIX vivo: <" + vivoCore + "> . \n" +
         "PREFIX bibo: <http://purl.org/ontology/bibo/> . \n" +
         "SELECT existingDocument WHERE { \n" +
@@ -182,17 +182,17 @@ public class AddEditorshipToPersonGenerator extends VivoBaseGenerator implements
         "}";
 
     //Adding form specific data such as edit mode
-  	public void addFormSpecificData(EditConfigurationVTwo editConfiguration, VitroRequest vreq) {
-  		HashMap<String, Object> formSpecificData = new HashMap<String, Object>();
-  		formSpecificData.put("editMode", getEditMode(vreq).name().toLowerCase());
-  		editConfiguration.setFormSpecificData(formSpecificData);
-  	}
+      public void addFormSpecificData(EditConfigurationVTwo editConfiguration, VitroRequest vreq) {
+      	HashMap<String, Object> formSpecificData = new HashMap<String, Object>();
+      	formSpecificData.put("editMode", getEditMode(vreq).name().toLowerCase());
+      	editConfiguration.setFormSpecificData(formSpecificData);
+      }
 
-  	public EditMode getEditMode(VitroRequest vreq) {
-  		List<String> predicates = new ArrayList<String>();
-  		predicates.add("http://vivoweb.org/ontology/core#relates");
-  		return EditModeUtils.getEditMode(vreq, predicates);
-  	}
+      public EditMode getEditMode(VitroRequest vreq) {
+      	List<String> predicates = new ArrayList<String>();
+      	predicates.add("http://vivoweb.org/ontology/core#relates");
+      	return EditModeUtils.getEditMode(vreq, predicates);
+      }
 
     private EditConfigurationVTwo doBadEditorshipMultiplePubs(VitroRequest vreq) {
         // TODO Auto-generated method stub
@@ -205,9 +205,9 @@ public class AddEditorshipToPersonGenerator extends VivoBaseGenerator implements
     }
 
     private List<List<String>> getDocumentTypeLiteralOptions(VitroRequest vreq) throws Exception {
-    	//UQAM Replacing hard coding assigment by a dynamic assigment that takes into account the linguistic context
-    	List<List<String>> value =  GeneratorUtil.builFieldOptionsList(vreq, DESCRIBE_QUERY);
-    	return value;
+        //UQAM Replacing hard coding assigment by a dynamic assigment that takes into account the linguistic context
+        List<List<String>> value =  GeneratorUtil.builFieldOptionsList(vreq, DESCRIBE_QUERY);
+        return value;
 
 //        List<List<String>> literalOptions = new ArrayList<List<String>>();
 //        literalOptions.add(list("http://purl.org/ontology/bibo/Book", "Book"));

@@ -15,58 +15,58 @@ public class AddAttendeeRoleToPersonGenerator extends AddRoleToPersonTwoStageGen
 
     @Override
     String getRoleType() {
-    	return "http://vivoweb.org/ontology/core#AttendeeRole";
+        return "http://vivoweb.org/ontology/core#AttendeeRole";
     }
 
     /** Editor role involves hard-coded options for the "right side" of the role or activity. */
     @Override
     FieldOptions getRoleActivityFieldOptions(VitroRequest vreq) throws Exception {
-    	//        return new ConstantFieldOptions(
-    	//        "", "Select type",
-    	//        "http://purl.org/NET/c4dm/event.owl#Event", "Event",
-    	//        "http://vivoweb.org/ontology/core#Competition", "Competition",
-    	//        "http://purl.org/ontology/bibo/Conference", "Conference",
-    	//        "http://vivoweb.org/ontology/core#Course", "Course",
-    	//        "http://vivoweb.org/ontology/core#Exhibit", "Exhibit",
-    	//        "http://purl.org/ontology/bibo/Hearing", "Hearing",
-    	//        "http://purl.org/ontology/bibo/Interview", "Interview",
-    	//        "http://vivoweb.org/ontology/core#Meeting", "Meeting",
-    	//        "http://purl.org/ontology/bibo/Performance", "Performance",
-    	//        "http://vivoweb.org/ontology/core#Presentation", "Presentation",
-    	//        "http://vivoweb.org/ontology/core#InvitedTalk", "Invited Talk",
-    	//        "http://purl.org/ontology/bibo/Workshop", "Workshop",
-    	//        "http://vivoweb.org/ontology/core#EventSeries", "Event Series",
-    	//        "http://vivoweb.org/ontology/core#ConferenceSeries", "Conference Series",
-    	//        "http://vivoweb.org/ontology/core#SeminarSeries", "Seminar Series",
-    	//        "http://vivoweb.org/ontology/core#WorkshopSeries", "Workshop Series"
-    	//        );
+        //        return new ConstantFieldOptions(
+        //        "", "Select type",
+        //        "http://purl.org/NET/c4dm/event.owl#Event", "Event",
+        //        "http://vivoweb.org/ontology/core#Competition", "Competition",
+        //        "http://purl.org/ontology/bibo/Conference", "Conference",
+        //        "http://vivoweb.org/ontology/core#Course", "Course",
+        //        "http://vivoweb.org/ontology/core#Exhibit", "Exhibit",
+        //        "http://purl.org/ontology/bibo/Hearing", "Hearing",
+        //        "http://purl.org/ontology/bibo/Interview", "Interview",
+        //        "http://vivoweb.org/ontology/core#Meeting", "Meeting",
+        //        "http://purl.org/ontology/bibo/Performance", "Performance",
+        //        "http://vivoweb.org/ontology/core#Presentation", "Presentation",
+        //        "http://vivoweb.org/ontology/core#InvitedTalk", "Invited Talk",
+        //        "http://purl.org/ontology/bibo/Workshop", "Workshop",
+        //        "http://vivoweb.org/ontology/core#EventSeries", "Event Series",
+        //        "http://vivoweb.org/ontology/core#ConferenceSeries", "Conference Series",
+        //        "http://vivoweb.org/ontology/core#SeminarSeries", "Seminar Series",
+        //        "http://vivoweb.org/ontology/core#WorkshopSeries", "Workshop Series"
+        //        );
 
-    	// UQAM Replacing the above hard coding assignment by a dynamic assignment that takes into account the linguistic context
-    	ConstantFieldOptions filedOptions = GeneratorUtil.buildConstantFieldOptions(vreq, DESCRIBE_QUERY);
-    	return filedOptions;
+        // UQAM Replacing the above hard coding assignment by a dynamic assignment that takes into account the linguistic context
+        ConstantFieldOptions filedOptions = GeneratorUtil.buildConstantFieldOptions(vreq, DESCRIBE_QUERY);
+        return filedOptions;
     }
     /*
      * UQAM get attributes for this specific subject
      */
     private static String DESCRIBE_QUERY = " describe "+
-    		"<http://purl.org/NET/c4dm/event.owl#Event> "+
-    		"<http://vivoweb.org/ontology/core#Competition> "+
-    		"<http://purl.org/ontology/bibo/Conference> "+
-    		"<http://vivoweb.org/ontology/core#Course> "+
-    		"<http://vivoweb.org/ontology/core#Exhibit> "+
-    		"<http://purl.org/ontology/bibo/Hearing> "+
-    		"<http://purl.org/ontology/bibo/Interview> "+
-    		"<http://vivoweb.org/ontology/core#Meeting> "+
-    		"<http://purl.org/ontology/bibo/Performance> "+
-    		"<http://vivoweb.org/ontology/core#Presentation> "+
-    		"<http://vivoweb.org/ontology/core#InvitedTalk> "+
-    		"<http://purl.org/ontology/bibo/Workshop> "+
-    		"<http://vivoweb.org/ontology/core#EventSeries> "+
-    		"<http://vivoweb.org/ontology/core#ConferenceSeries> "+
-    		"<http://vivoweb.org/ontology/core#SeminarSeries> "+
-    		"<http://vivoweb.org/ontology/core#WorkshopSeries> ";
+        	"<http://purl.org/NET/c4dm/event.owl#Event> "+
+        	"<http://vivoweb.org/ontology/core#Competition> "+
+        	"<http://purl.org/ontology/bibo/Conference> "+
+        	"<http://vivoweb.org/ontology/core#Course> "+
+        	"<http://vivoweb.org/ontology/core#Exhibit> "+
+        	"<http://purl.org/ontology/bibo/Hearing> "+
+        	"<http://purl.org/ontology/bibo/Interview> "+
+        	"<http://vivoweb.org/ontology/core#Meeting> "+
+        	"<http://purl.org/ontology/bibo/Performance> "+
+        	"<http://vivoweb.org/ontology/core#Presentation> "+
+        	"<http://vivoweb.org/ontology/core#InvitedTalk> "+
+        	"<http://purl.org/ontology/bibo/Workshop> "+
+        	"<http://vivoweb.org/ontology/core#EventSeries> "+
+        	"<http://vivoweb.org/ontology/core#ConferenceSeries> "+
+        	"<http://vivoweb.org/ontology/core#SeminarSeries> "+
+        	"<http://vivoweb.org/ontology/core#WorkshopSeries> ";
     boolean isShowRoleLabelField() {
-    	return false;
+        return false;
     }
 
     /*
@@ -78,12 +78,12 @@ public class AddAttendeeRoleToPersonGenerator extends AddRoleToPersonTwoStageGen
     /*
         public String getStartDatePrecision() {
             String precision = VitroVocabulary.Precision.MONTH.uri();
-    	    return precision;
+            return precision;
         }
 
         public String getEndDatePrecision() {
             String precision = VitroVocabulary.Precision.DAY.uri();
-    	    return precision;
+            return precision;
         }
      */
 }

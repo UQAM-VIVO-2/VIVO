@@ -393,13 +393,13 @@ final public class VisualizationCaches {
                     new CachingRDFServiceExecutor.RDFServiceCallable<ConceptLabelMap>() {
                         @Override
                         protected ConceptLabelMap callWithService(RDFService rdfService) throws Exception {
-                        	VitroRequest vreq = rdfService.getVitroRequest();
+                            VitroRequest vreq = rdfService.getVitroRequest();
                             String langCtx = "en-US";
-    						// UQAM Adjust to linguistic context
-                        	try {
-                        		 langCtx  = vreq.getLocale().getLanguage() + "-"+vreq.getLocale().getCountry();
-    						} catch (Exception e) {
-    						}
+        					// UQAM Adjust to linguistic context
+                            try {
+                            	 langCtx  = vreq.getLocale().getLanguage() + "-"+vreq.getLocale().getCountry();
+        					} catch (Exception e) {
+        					}
                             String query = QueryConstants.getSparqlPrefixQuery() +
                                     "SELECT ?concept ?label\n" +
                                     "WHERE\n" +
@@ -408,7 +408,7 @@ final public class VisualizationCaches {
                                     "    ?person core:hasResearchArea ?concept .\n" +
                                     "    ?concept a skos:Concept .\n" +
                                     "    ?concept rdfs:label ?label .\n" +
-                    				"    FILTER (lang(?label) = '" + langCtx+"' )  \n" +
+                        			"    FILTER (lang(?label) = '" + langCtx+"' )  \n" +
                                     "}\n";
 
 //                            final Map<String, String> map = new HashMap<>();

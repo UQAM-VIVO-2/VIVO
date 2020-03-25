@@ -43,15 +43,15 @@ public class AddEditorRoleToPersonGenerator extends AddRoleToPersonTwoStageGener
 
     @Override
     String getRoleType() {
-    	return "http://vivoweb.org/ontology/core#EditorRole";
+        return "http://vivoweb.org/ontology/core#EditorRole";
     }
 
     @Override
     FieldOptions getRoleActivityFieldOptions(VitroRequest vreq) throws Exception {
-    	// UQAM Managing linguistic context
-    	I18nBundle i18n = I18n.bundle(vreq);
-    	String i18nSelectType = i18n.text("select_type");
-    	String selectType = (i18nSelectType == null || i18nSelectType.isEmpty()) ? "Select type" : i18nSelectType ;
+        // UQAM Managing linguistic context
+        I18nBundle i18n = I18n.bundle(vreq);
+        String i18nSelectType = i18n.text("select_type");
+        String selectType = (i18nSelectType == null || i18nSelectType.isEmpty()) ? "Select type" : i18nSelectType ;
 
         return new ChildVClassesOptions(OPTION_CLASS_URI)
             .setDefaultOptionLabel(selectType);
@@ -59,7 +59,7 @@ public class AddEditorRoleToPersonGenerator extends AddRoleToPersonTwoStageGener
 
     /** Do not show the role label field for the AddEditorRoleToPerson form */
     @Override
-    boolean isShowRoleLabelField() { return true;	}
+    boolean isShowRoleLabelField() { return true;    }
 
    /*
     * Use the methods below to change the date/time precision in the

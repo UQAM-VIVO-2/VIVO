@@ -16,21 +16,21 @@ public class AddHeadOfRoleToPersonGenerator extends AddRoleToPersonTwoStageGener
     //Should this be overridden
     @Override
     String getTemplate() {
-    	return template;
+        return template;
     }
 
     @Override
     String getRoleType() {
-    	return "http://vivoweb.org/ontology/core#LeaderRole";
+        return "http://vivoweb.org/ontology/core#LeaderRole";
     }
 
     /** Head Of role involves hard-coded options for the "right side" of the role or activity */
     @Override
     FieldOptions getRoleActivityFieldOptions(VitroRequest vreq) throws Exception {
-    	// UQAM Taking into account the linguistic context
-    	I18nBundle i18n = I18n.bundle(vreq);
-    	String i18nSelectType = i18n.text("select_type");
-    	String selectType = (i18nSelectType == null || i18nSelectType.isEmpty()) ? "Select type" : i18nSelectType ;
+        // UQAM Taking into account the linguistic context
+        I18nBundle i18n = I18n.bundle(vreq);
+        String i18nSelectType = i18n.text("select_type");
+        String selectType = (i18nSelectType == null || i18nSelectType.isEmpty()) ? "Select type" : i18nSelectType ;
 
         return new
         ChildVClassesOptions(OPTION_CLASS_URI)

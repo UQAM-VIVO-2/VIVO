@@ -12,26 +12,26 @@ public class AddResearcherRoleToPersonGenerator extends AddRoleToPersonTwoStageG
 
     @Override
     String getTemplate() {
-    	return template;
+        return template;
     }
 
     @Override
     public String getRoleType() {
-    	return "http://vivoweb.org/ontology/core#ResearcherRole";
+        return "http://vivoweb.org/ontology/core#ResearcherRole";
     }
 
     /** Researcher role involves hard-coded options for the "right side" of the role or activity. */
     @Override
     FieldOptions getRoleActivityFieldOptions(VitroRequest vreq) throws Exception {
-    	//UQAM Replacing the above hard coding assigment by a dynamic assigment that takes into account the linguistic context
-    	ConstantFieldOptions filedOptions = GeneratorUtil.buildConstantFieldOptions(vreq, DESCRIBE_QUERY);
-    	return filedOptions;
-//		return new ConstantFieldOptions(
-//		        "", "Select one",
-//		        "http://vivoweb.org/ontology/core#Grant", "Grant",
-//	        "http://purl.obolibrary.org/obo/ERO_0000015", "Human Study",
-//	        "http://vivoweb.org/ontology/core#Project", "Project",
-//	        "http://purl.obolibrary.org/obo/ERO_0000014", "Research Project");
+        //UQAM Replacing the above hard coding assigment by a dynamic assigment that takes into account the linguistic context
+        ConstantFieldOptions filedOptions = GeneratorUtil.buildConstantFieldOptions(vreq, DESCRIBE_QUERY);
+        return filedOptions;
+//    	return new ConstantFieldOptions(
+//    	        "", "Select one",
+//    	        "http://vivoweb.org/ontology/core#Grant", "Grant",
+//            "http://purl.obolibrary.org/obo/ERO_0000015", "Human Study",
+//            "http://vivoweb.org/ontology/core#Project", "Project",
+//            "http://purl.obolibrary.org/obo/ERO_0000014", "Research Project");
     }
     /*
      * UQAM get attributes for this specific subject
