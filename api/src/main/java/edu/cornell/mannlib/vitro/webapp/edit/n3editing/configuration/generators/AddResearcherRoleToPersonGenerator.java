@@ -8,40 +8,40 @@ import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.FieldOptions;
 
 public class AddResearcherRoleToPersonGenerator extends AddRoleToPersonTwoStageGenerator {
 
-	private static String template = "addResearcherRoleToPerson.ftl";
+    private static String template = "addResearcherRoleToPerson.ftl";
 
-	@Override
-	String getTemplate() {
-		return template;
-	}
+    @Override
+    String getTemplate() {
+    	return template;
+    }
 
-	@Override
-	public String getRoleType() {
-		return "http://vivoweb.org/ontology/core#ResearcherRole";
-	}
+    @Override
+    public String getRoleType() {
+    	return "http://vivoweb.org/ontology/core#ResearcherRole";
+    }
 
-	/** Researcher role involves hard-coded options for the "right side" of the role or activity. */
-	@Override
-	FieldOptions getRoleActivityFieldOptions(VitroRequest vreq) throws Exception {
-		//UQAM Replacing the above hard coding assigment by a dynamic assigment that takes into account the linguistic context
-		ConstantFieldOptions filedOptions = GeneratorUtil.buildConstantFieldOptions(vreq, DESCRIBE_QUERY);
-		return filedOptions;
+    /** Researcher role involves hard-coded options for the "right side" of the role or activity. */
+    @Override
+    FieldOptions getRoleActivityFieldOptions(VitroRequest vreq) throws Exception {
+    	//UQAM Replacing the above hard coding assigment by a dynamic assigment that takes into account the linguistic context
+    	ConstantFieldOptions filedOptions = GeneratorUtil.buildConstantFieldOptions(vreq, DESCRIBE_QUERY);
+    	return filedOptions;
 //		return new ConstantFieldOptions(
 //		        "", "Select one",
 //		        "http://vivoweb.org/ontology/core#Grant", "Grant",
 //	        "http://purl.obolibrary.org/obo/ERO_0000015", "Human Study",
 //	        "http://vivoweb.org/ontology/core#Project", "Project",
 //	        "http://purl.obolibrary.org/obo/ERO_0000014", "Research Project");
-	}
-	/*
-	 * UQAM get attributes for this specific subject
-	 */
-	private static String DESCRIBE_QUERY = " describe "+
-	    "<http://vivoweb.org/ontology/core#Grant> " +
+    }
+    /*
+     * UQAM get attributes for this specific subject
+     */
+    private static String DESCRIBE_QUERY = " describe "+
+        "<http://vivoweb.org/ontology/core#Grant> " +
         "<http://purl.obolibrary.org/obo/ERO_0000015> " +
         "<http://vivoweb.org/ontology/core#Project> " +
         "<http://purl.obolibrary.org/obo/ERO_0000014> ";
-	@Override
+    @Override
     boolean isShowRoleLabelField() { return true;  }
    /*
     * Use the methods below to change the date/time precision in the
@@ -52,12 +52,12 @@ public class AddResearcherRoleToPersonGenerator extends AddRoleToPersonTwoStageG
 /*
     public String getStartDatePrecision() {
         String precision = VitroVocabulary.Precision.MONTH.uri();
-	    return precision;
+        return precision;
     }
 
     public String getEndDatePrecision() {
         String precision = VitroVocabulary.Precision.DAY.uri();
-	    return precision;
+        return precision;
     }
 */
 }

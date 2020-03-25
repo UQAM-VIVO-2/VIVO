@@ -139,11 +139,11 @@ public class CachingRDFServiceExecutor<T> {
             		startBackgroundTask(rdfService);
             		completeBackgroundTask();
         		}
-			} catch (Exception e) {
+    		} catch (Exception e) {
     			backgroundRDFService.setVitroRequest(rdfService.getVitroRequest());
-	    		startBackgroundTask(rdfService);
-	    		completeBackgroundTask();
-			}
+        		startBackgroundTask(rdfService);
+        		completeBackgroundTask();
+    		}
     		return cachedResults;
     	}
         // First, check if there are results from the previous background task, and update the cache
@@ -441,21 +441,21 @@ public class CachingRDFServiceExecutor<T> {
          */
         boolean invalidateCache(long timeCached) {
             if (executionTime > -1) {
-					/*
-						Determine validity as a function of the time it takes to execute the query.
+    				/*
+    					Determine validity as a function of the time it takes to execute the query.
 
-						Query exec time  | Keep cache for
-						-----------------+-----------------
-						10 seconds       | 20 minutes
-						30 seconds       | 1 hour
-						1 minute         | 2 hours
-						5 minutes        | 10 hours
+    					Query exec time  | Keep cache for
+    					-----------------+-----------------
+    					10 seconds       | 20 minutes
+    					30 seconds       | 1 hour
+    					1 minute         | 2 hours
+    					5 minutes        | 10 hours
 
 
-						Multiplier of the last execution time is 120.
+    					Multiplier of the last execution time is 120.
 
-						At most, keep a cache for one day (24 * 60 * 60 * 1000 = 86400000)
-					 */
+    					At most, keep a cache for one day (24 * 60 * 60 * 1000 = 86400000)
+    				 */
 
                 return timeCached > Math.min(executionTime * 120, 86400000);
             }

@@ -35,31 +35,31 @@ import edu.cornell.mannlib.vitro.webapp.i18n.I18nBundle;
  *
  */
 public class AddEditorRoleToPersonGenerator extends AddRoleToPersonTwoStageGenerator {
-	private static String TEMPLATE = "addEditorRoleToPerson.ftl";
-	private static String OPTION_CLASS_URI = "http://purl.org/ontology/bibo/Collection";
+    private static String TEMPLATE = "addEditorRoleToPerson.ftl";
+    private static String OPTION_CLASS_URI = "http://purl.org/ontology/bibo/Collection";
 
-	@Override
-	String getTemplate(){ return TEMPLATE; }
+    @Override
+    String getTemplate(){ return TEMPLATE; }
 
-	@Override
-	String getRoleType() {
-		return "http://vivoweb.org/ontology/core#EditorRole";
-	}
+    @Override
+    String getRoleType() {
+    	return "http://vivoweb.org/ontology/core#EditorRole";
+    }
 
     @Override
     FieldOptions getRoleActivityFieldOptions(VitroRequest vreq) throws Exception {
     	// UQAM Managing linguistic context
-		I18nBundle i18n = I18n.bundle(vreq);
-		String i18nSelectType = i18n.text("select_type");
-		String selectType = (i18nSelectType == null || i18nSelectType.isEmpty()) ? "Select type" : i18nSelectType ;
+    	I18nBundle i18n = I18n.bundle(vreq);
+    	String i18nSelectType = i18n.text("select_type");
+    	String selectType = (i18nSelectType == null || i18nSelectType.isEmpty()) ? "Select type" : i18nSelectType ;
 
         return new ChildVClassesOptions(OPTION_CLASS_URI)
             .setDefaultOptionLabel(selectType);
     }
 
-	/** Do not show the role label field for the AddEditorRoleToPerson form */
-	@Override
-	boolean isShowRoleLabelField() { return true;	}
+    /** Do not show the role label field for the AddEditorRoleToPerson form */
+    @Override
+    boolean isShowRoleLabelField() { return true;	}
 
    /*
     * Use the methods below to change the date/time precision in the
@@ -70,12 +70,12 @@ public class AddEditorRoleToPersonGenerator extends AddRoleToPersonTwoStageGener
 /*
     public String getStartDatePrecision() {
         String precision = VitroVocabulary.Precision.MONTH.uri();
-	    return precision;
+        return precision;
     }
 
     public String getEndDatePrecision() {
         String precision = VitroVocabulary.Precision.DAY.uri();
-	    return precision;
+        return precision;
     }
 */
 }

@@ -8,52 +8,52 @@ import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.FieldOptions;
 
 public class AddClinicalRoleToPersonGenerator extends AddRoleToPersonTwoStageGenerator {
 
-	private static String template = "addClinicalRoleToPerson.ftl";
+    private static String template = "addClinicalRoleToPerson.ftl";
 
-	//Should this be overridden
-	@Override
-	String getTemplate() {
-		return template;
-	}
+    //Should this be overridden
+    @Override
+    String getTemplate() {
+    	return template;
+    }
 
-	@Override
-	String getRoleType() {
-		return "http://vivoweb.org/ontology/core#ClinicalRole";
-	}
+    @Override
+    String getRoleType() {
+    	return "http://vivoweb.org/ontology/core#ClinicalRole";
+    }
 
-	/** Clinical role involves hard-coded options for the "right side" of the role or activity. */
-	@Override
-	FieldOptions getRoleActivityFieldOptions(VitroRequest vreq) throws Exception {
-		//		return new ConstantFieldOptions(
-		//		        "",  "Select one",
-		//		        "http://vivoweb.org/ontology/core#Project", "Project",
-		//		        "http://purl.obolibrary.org/obo/ERO_0000005", "Service"
-		//		);
+    /** Clinical role involves hard-coded options for the "right side" of the role or activity. */
+    @Override
+    FieldOptions getRoleActivityFieldOptions(VitroRequest vreq) throws Exception {
+    	//		return new ConstantFieldOptions(
+    	//		        "",  "Select one",
+    	//		        "http://vivoweb.org/ontology/core#Project", "Project",
+    	//		        "http://purl.obolibrary.org/obo/ERO_0000005", "Service"
+    	//		);
 
-		//UQAM Replacing the above hard coding assigment by a dynamic assigment that takes into account the linguistic context
-		ConstantFieldOptions filedOptions = GeneratorUtil.buildConstantFieldOptions(vreq, DESCRIBE_QUERY);
-		return filedOptions;
-	}
-	/*
-	 * UQAM get attributes for this specific subject
-	 */
-	private static String DESCRIBE_QUERY = " describe "+
-			"<http://vivoweb.org/ontology/core#Project> "+
-			"<http://purl.obolibrary.org/obo/ERO_0000005>";
-	//isShowRoleLabelField remains true for this so doesn't need to be overwritten
-	@Override
-	boolean isShowRoleLabelField(){
-		return true;
-	}
+    	//UQAM Replacing the above hard coding assigment by a dynamic assigment that takes into account the linguistic context
+    	ConstantFieldOptions filedOptions = GeneratorUtil.buildConstantFieldOptions(vreq, DESCRIBE_QUERY);
+    	return filedOptions;
+    }
+    /*
+     * UQAM get attributes for this specific subject
+     */
+    private static String DESCRIBE_QUERY = " describe "+
+    		"<http://vivoweb.org/ontology/core#Project> "+
+    		"<http://purl.obolibrary.org/obo/ERO_0000005>";
+    //isShowRoleLabelField remains true for this so doesn't need to be overwritten
+    @Override
+    boolean isShowRoleLabelField(){
+    	return true;
+    }
 
 
-	/*
-	 * Use the methods below to change the date/time precision in the
-	 * custom form associated with this generator. When not used, the
-	 * precision will be YEAR. The other precisons are MONTH, DAY, HOUR,
-	 * MINUTE, TIME and NONE.
-	 */
-	/*
+    /*
+     * Use the methods below to change the date/time precision in the
+     * custom form associated with this generator. When not used, the
+     * precision will be YEAR. The other precisons are MONTH, DAY, HOUR,
+     * MINUTE, TIME and NONE.
+     */
+    /*
         public String getStartDatePrecision() {
             String precision = VitroVocabulary.Precision.MONTH.uri();
     	    return precision;
@@ -63,6 +63,6 @@ public class AddClinicalRoleToPersonGenerator extends AddRoleToPersonTwoStageGen
             String precision = VitroVocabulary.Precision.DAY.uri();
     	    return precision;
         }
-	 */
+     */
 
 }
